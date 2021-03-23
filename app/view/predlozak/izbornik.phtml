@@ -13,7 +13,11 @@
         <li><a href="#">Usluge</a></li>
         <li><a href="#">O nama</a></li>
         <li>
-        <a href="<?=App::config('url')?>index/login">Prijavi se</a>
+        <?php if(!isset($_SESSION['autoriziran'])): ?>
+          <a href="<?=App::config('url')?>index/login">Prijavi se</a>
+        <?php else: ?>
+          <a href="<?=App::config('url')?>index/logout">Odjava</a>
+        <?php endif;?>
         </li>
       </ul>
     </div>

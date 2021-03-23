@@ -1,13 +1,15 @@
-<form class="log-in-form">
+<form class="log-in-form"
+  action="<?=App::config('url')?>index/autorizacija"
+  method="POST">
   <h4 class="text-center">Log in with you email account</h4>
   <label>Email
-    <input type="email" placeholder="somebody@example.com">
+  <input type="email" name="email" value="<?=$email?>">
   </label>
-  <label>Password
-    <input type="password" placeholder="Password">
+  <label>Lozinka
+  <input type="password" name="lozinka" >
   </label>
-  <input id="show-password" type="checkbox"><label for="show-password">Show password</label>
-  <p><input type="submit" class="button expanded" value="Log in"></input></p>
+  <p><input type="submit" class="button expanded" value="Prijava"></input></p>
+<?=$poruka?>
   <p class="text-center"><a href="#">Forgot your password?</a></p>
 </form>
 

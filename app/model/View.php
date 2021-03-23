@@ -16,7 +16,16 @@ class View
         include BP . 'view' . DIRECTORY_SEPARATOR . 
         $stranicaZaRender . '.phtml';
         $sadrzaj = ob_get_clean();
-        include BP . 'view' . DIRECTORY_SEPARATOR .
+        $podnozjePodaci=$this->podnozjePodaci();
+        include BP . 'view' . DIRECTORY_SEPARATOR .  
         $this->predlozak . '.phtml';
+    }
+
+    private function podnozjePodaci()
+    {
+        if($_SERVER['SERVER_ADDR']==='127.0.0.1'){
+            return '2020-' . date('Y') . ' - lokalno';
+        }
+      return '2020-' . date('Y');
     }
 }

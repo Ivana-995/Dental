@@ -36,18 +36,26 @@ class IndexController extends Controller
             return;
         }
 
-        if(strlen(trim($_POST['lozinka']))===0){
-            $this->loginView($_POST['email'],'Obavezno lozinka');
+        $veza = DB::getInstanca();
+        $izraz=$veza->prepare('
+        
+            select * from operater where email=:email
+        
+        ');
+        $izraz->execute(['email'=>$_POST['email']]);
+        $rezultat = $izraz->fetch();
+
+        if($rezultat==null){
+            $this->loginView($_POST['email'],'Email ne postoji u bazi');
             return;
         }
-
-        if(!($_POST['email']==='edunova@edunova.hr' && 
-        $_POST['lozinka']==='e') ){
-            $this->loginView($_POST['email'],'Neispravna kombinacija emaila i lozinke');
+        if(!password_verify($_POST['lozinka'],$rezultat->lozinka)){
+            $this->loginView($_POST['email'],'Kombinacija email i lozinka ne odgovaraju');
             return;
     }
 
-    $_SESSION['autoriziran']='Edunova Korisnik';
+    unset($rezultat->lozinka);
+    $_SESSION['autoriziran']=$rezultat;
     $np = new NadzornaplocaController();
     $np->index();
 
@@ -60,4 +68,11 @@ class IndexController extends Controller
             'poruka'=>$poruka
         ]);
     }
+
+    /*
+    public function test()
+    {
+        echo password_hash('plavizub',PASSWORD_BCRYPT);
+    }
+    */
 }

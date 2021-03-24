@@ -4,6 +4,8 @@ create database dental character set utf8mb4
 collate utf8mb4_croatian_ci;
 use dental;
 
+alter database ereb_dental default character set utf8mb4;
+
 create table stomatolog(
 sifra int not null primary key auto_increment,
 ime varchar(50) not null,

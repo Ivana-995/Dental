@@ -1,5 +1,5 @@
 /* izbornik START*/
-.topbar-responsive {
+ .topbar-responsive {
     background: #1a6394;
     padding: 1rem 1.5rem;
   }
@@ -126,17 +126,267 @@
               animation: fadeIn 1s ease-in;
     }
   }
-  /* izbornik END */
+/* izbornik END */
+
+/* novosti START */
   
+  .article-row-section {
+    max-width: 75rem;
+    margin-right: auto;
+    margin-left: auto;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
 
-  /* prijavi se START */
+  .article-row-section-inner {
+    -webkit-flex: 0 0 100%;
+        -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+    max-width: 100%;
+    padding-right: 0.625rem;
+    padding-left: 0.625rem;
+    max-width: 100%;
+  }
 
-  .log-in-form {
+  @media print, screen and (min-width: 40em) {
+    .article-row-section-inner {
+      padding-right: 0.9375rem;
+      padding-left: 0.9375rem;
+    }
+  }
+
+  @media print, screen and (min-width: 40em) {
+    .article-row-section-inner {
+      -webkit-flex: 0 0 83.33333%;
+          -ms-flex: 0 0 83.33333%;
+              flex: 0 0 83.33333%;
+      max-width: 83.33333%;
+      padding-right: 0.625rem;
+      padding-left: 0.625rem;
+      max-width: 83.33333%;
+    }
+  }
+
+  @media print, screen and (min-width: 40em) and (min-width: 40em) {
+    .article-row-section-inner {
+      padding-right: 0.9375rem;
+      padding-left: 0.9375rem;
+    }
+  }
+
+  .article-row-section-header {
+    padding: 1.5rem 0;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .article-row {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    border-top: 1px solid #e6e6e6;
+    padding: 1.5rem 0;
+  }
+
+  @media print, screen and (min-width: 40em) {
+    .article-row {
+      -webkit-flex-direction: row;
+          -ms-flex-direction: row;
+              flex-direction: row;
+    }
+  }
+
+  .article-row-img img {
+    width: 100%;
+  }
+
+  @media print, screen and (min-width: 40em) {
+    .article-row-img img {
+      max-width: none;
+      width: auto;
+    }
+  }
+
+  .article-row-content {
+    padding: 1.5rem 0 0;
+    color: #0a0a0a;
+  }
+
+  @media print, screen and (min-width: 40em) {
+    .article-row-content {
+      padding: 0 0 0 1.5rem;
+    }
+  }
+
+  .article-row-content-header {
+    font-size: 1.5rem;
+  }
+
+  .article-row-content-description {
+    font-size: 1.25rem;
+  }
+
+  .article-row-content-author,
+  .article-row-content-time {
+    font-size: 0.875rem;
+    margin-bottom: 0;
+    color: #8a8a8a;
+  }
+
+  .article-row-reversed .article-row-content {
+    -webkit-order: 2;
+        -ms-flex-order: 2;
+            order: 2;
+    padding: 0 1.5rem 0 0;
+  }
+
+  .article-row-reversed .article-row-img {
+    -webkit-order: 1;
+        -ms-flex-order: 1;
+            order: 1;
+    padding: 0 0 1.5rem 0;
+  }
+
+  @media print, screen and (min-width: 40em) {
+    .article-row-reversed .article-row-content {
+      -webkit-order: 1;
+          -ms-flex-order: 1;
+              order: 1;
+    }
+    .article-row-reversed .article-row-img {
+      -webkit-order: 2;
+          -ms-flex-order: 2;
+              order: 2;
+    }
+  }
+/* novosti END */
+
+/* usluge START */
+  .work-feature-block {
+    padding: 10px 0;
+    border-top: 1px solid #cacaca;
+    border-bottom: 1px solid #cacaca;
+  }
+
+  .work-feature-block-image {
+    display: block;
+    margin: auto;
+    padding: 10px 0;
+  }
+/* usluge END */
+
+/* podnožje START */
+
+  .marketing-site-footer {
+    background: #2c3840;
+    color: #8aa0ae;
+    padding: 2rem 0 0;
+  }
+
+  .marketing-site-footer .marketing-site-footer-menu-social a {
+    color: #fefefe;
+  }
+
+  .marketing-site-footer .column-block {
+    margin-bottom: 30px;
+  }
+
+  .marketing-site-footer > .row {
+    margin-bottom: 1rem;
+  }
+
+  @media screen and (max-width: 39.9375em) {
+    .marketing-site-footer .columns {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .marketing-site-footer-name {
+    color: #fefefe;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+  }
+
+  .marketing-site-footer-title {
+    color: #fefefe;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+
+  .marketing-site-footer-block {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 1rem;
+  }
+
+  .marketing-site-footer-block .fa {
+    font-size: 2rem;
+    color: #020304;
+  }
+
+  .marketing-site-footer-block p {
+    margin-left: 1rem;
+    line-height: 1.125rem;
+  }
+
+  .marketing-site-footer-bottom {
+    background: #1a6394;
+    padding: 1rem 0;
+  }
+
+  .marketing-site-footer-bottom p,
+  .marketing-site-footer-bottom .menu {
+    margin-bottom: 0;
+  }
+
+  .marketing-site-footer-bottom .marketing-site-footer-bottom-links {
+    -webkit-justify-content: flex-end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
+
+  .marketing-site-footer-bottom .marketing-site-footer-bottom-links a {
+    color: #8aa0ae;
+  }
+
+  @media screen and (max-width: 63.9375em) {
+    .marketing-site-footer-bottom .marketing-site-footer-bottom-links {
+      -webkit-justify-content: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+    }
+  }
+
+  @media screen and (max-width: 63.9375em) {
+    .marketing-site-footer-bottom {
+      text-align: center;
+    }
+  }
+
+
+/* podnožje END */
+
+/* prijavi se START */
+ .log-in-form {
     border: 1px solid #cacaca;
     padding: 1rem;
     border-radius: 0;
   }
-  
-  
+/* prijavi se END */
 
-  /* prijavi se END */
+
+
+
+
+

@@ -18,7 +18,8 @@ class DB extends PDO
 
     public static function getInstanca()
     {
-        if(self::$instanca==null){
+        if(self::$instanca==null)
+        {
             self::$instanca = new self(App::config('baza'));
         }
         return self::$instanca;

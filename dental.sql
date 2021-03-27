@@ -24,9 +24,9 @@ email varchar(50)
 
 create table usluga(
 sifra int not null primary key auto_increment,
-vrsta varchar (50) not null,
-cijena decimal (12,2),
-opis text
+naziv varchar(50) not null,
+vrsta varchar(50) not null,
+cijena decimal(12,2),
 );
 
 create table posjeta(
@@ -50,7 +50,7 @@ prezime varchar(50) not null,
 uloga varchar(10) not null 
 );
 
-insert into usluga (vrsta,cijena,opis) values
+insert into usluga (naziv,cijena,vrsta) values
 ('Implantologija',5500,'Implantant Nobel'),
 ('Implantologija',1800,'Superstruktura Nobel'),
 ('Protetika',1800,'Keramička kruna na wirron metalu'),

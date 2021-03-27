@@ -1,4 +1,12 @@
-<pre>
-
-<?php print_r($usluge); ?>
-</pre>
+<h3>Usluge</h3>
+<a href="<?=App::config('url')?>usluga/novo">Dodaj novu uslugu</a>
+<ul>
+    <?php foreach($usluge as $usluga): ?>
+        <li><strong><?=$usluga->naziv, ' - '?></strong>
+        <?=$usluga->vrsta, ' = '  ?>
+        <?=$usluga->cijena, 'kn'?></li>
+        <a href="#">Promjeni | </a>
+        <a href="#"> Obriši</a>
+        
+        <?php endforeach; ?>
+</ul>

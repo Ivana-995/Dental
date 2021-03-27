@@ -24,7 +24,7 @@ email varchar(50)
 
 create table usluga(
 sifra int not null primary key auto_increment,
-ime varchar (40) not null,
+vrsta varchar (50) not null,
 cijena decimal (12,2),
 opis text
 );
@@ -50,10 +50,19 @@ prezime varchar(50) not null,
 uloga varchar(10) not null 
 );
 
-insert into operater values(null,'ilalic110@gmail.com',
+insert into usluga (vrsta,cijena,opis) values
+('Implantologija',5500,'Implantant Nobel'),
+('Implantologija',1800,'Superstruktura Nobel'),
+('Protetika',1800,'Keramička kruna na wirron metalu'),
+('Protetika',3700,'Totalna proteza(akrilat)'),
+('Ortodoncija',200,'Specijalistički ortodontski pregled'),
+('Ortodoncija',9000,'Bijele bravice - Ortodonski aparat - po čeljusti');
+
+insert into operater (sifra,email,lozinka,ime,prezime,uloga)values
+(null,'ilalic110@gmail.com',
 '$2y$10$UKqqzzvf3rhylzcXjsIAW.u9xDMmq1gV6cMHy0yYanbs1bMV/BFG6',
-'Ivana', 'Lalić', 'operater'); 
-insert into operater values(null,'bluetooth@gmail.com',
+'Ivana', 'Lalić', 'operater'), 
+(null,'bluetooth@gmail.com',
 '$2y$10$L1/Vyydt.F0YYDgBNQ.uIu8Gk5ZyDkU6xBzgrb9JsDfKXEs5a/JQ.',
 'Marko', 'Marulić', 'admin');
 

@@ -13,6 +13,11 @@ class IndexController extends Controller
         $this->view->render('novosti');
     }
 
+    public function era()
+    {
+        $this->view->render('era');
+    }
+
     public function usluge()
     {
         $this->view->render('usluge');

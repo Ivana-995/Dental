@@ -8,23 +8,29 @@
   <div id="topbar-responsive" class="topbar-responsive-links">
     <div class="top-bar-right">
       <ul class="menu simple vertical medium-horizontal">
+
         <?php if(isset($_SESSION['autoriziran'])): ?>
-      <li><a href="<?=App::config('url')?>nadzornaploca/index">Nadzorna ploča</a></li>
-      <li>       
+          <li><a href="<?=App::config('url')?>nadzornaploca/index">Nadzorna ploča</a></li>
+          <li><a href="<?=App::config('url')?>index/era">ERA</a></li>
+          <li><a href="<?=App::config('url')?>usluga/index">Usluga</a></li>          
         <?php if($_SESSION['autoriziran']->uloga=='admin'): ?>
           <li><a href="#">Operateri</a></li>
         <?php endif;?>
-      </li>
-          <?php endif;?>
-        <li><a href="<?=App::config('url')?>">Početna</a></li>
-        <li><a href="<?=App::config('url')?>index/novosti">Novosti</a></li>
-        <li><a href="<?=App::config('url')?>index/usluge">Usluge</a></li>
-        <li><a href="<?=App::config('url')?>index/kontakt">O nama</a></li>
-        <li>
+
+        <?php if(!isset($_SESSION['autoriziran'])): ?>
+          <li><a href="<?=App::config('url')?>">Početna</a></li>
+          <li><a href="<?=App::config('url')?>index/novosti">Novosti</a></li>
+          <li><a href="<?=App::config('url')?>index/usluge">Usluge</a></li>
+          <li><a href="<?=App::config('url')?>index/kontakt">O nama</a></li>
+        <?php endif;?>
+          <li>
         <?php if(!isset($_SESSION['autoriziran'])): ?>
           <a href="<?=App::config('url')?>index/login">Prijavi se</a>
         <?php else: ?>
-          <a href="<?=App::config('url')?>index/logout">Odjava</a>
+          <a href="<?=App::config('url')?>index/logout">
+          <?=$_SESSION['autoriziran']->ime?> 
+          <?=$_SESSION['autoriziran']->prezime?> Odjava</a>
+        <?php endif;?>
         <?php endif;?>
         </li>
       </ul>

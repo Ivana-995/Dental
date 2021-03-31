@@ -1,12 +1,26 @@
-<h3>Usluge</h3>
-<a href="<?=App::config('url')?>usluga/novo">Dodaj novu uslugu</a>
-<ul>
-    <?php foreach($usluge as $usluga): ?>
-        <li><strong><?=$usluga->naziv, ' - '?></strong>
-        <?=$usluga->vrsta, ' = '  ?>
-        <?=$usluga->cijena, 'kn'?></li>
-        <a href="#">Promjeni | </a>
-        <a href="#"> Obriši</a>
-        
+<table>
+    <thead>
+        <tr>
+            <th>Vrsta</th>
+            <th>proizvod</th>
+            <th>opis</th>
+            <th>cijena</th>
+            <th style="text-align: right;">
+               <a href="#">Dodaj novu uslugu</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($entiteti as $red): ?>
+            <tr>
+                <td><?=$red->vrsta?></td>
+                <td><?=$red->proizvod?></td>
+                <td><?=$red->opis?></td>
+                <td><?=$red->cijena?></td>
+                <td><a href="">Promjeni</a>
+                <a href="">Obriši</a>
+                <td>
+            </tr>
         <?php endforeach; ?>
-</ul>
+    </tbody>
+</table>

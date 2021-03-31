@@ -10,9 +10,31 @@ create table stomatolog(
 sifra int not null primary key auto_increment,
 ime varchar(50) not null,
 prezime varchar(50) not null,
+specijalizacija int not null,
 kontakt int(15) not null,
 email varchar(50) not null
 );
+
+create table specijalizacija(
+sifra int not null primary key auto_increment,
+vrsta varchar(40) not null
+);
+
+create table usluga(
+sifra int not null primary key auto_increment,
+vrsta int not null,
+proizvod varchar(60),
+opis text,
+cijena int not null
+);
+
+create table termin(
+sifra int not null primary key auto_increment,
+datum datetime,
+usluga int not null,
+pacijent int not null
+);
+
 
 create table pacijent(
 sifra int not null primary key auto_increment,
@@ -20,25 +42,6 @@ ime varchar(50),
 prezime varchar(50),
 kontakt int(15),
 email varchar(50)
-);
-
-create table usluga(
-sifra int not null primary key auto_increment,
-naziv varchar(50) not null,
-vrsta varchar(50) not null,
-cijena decimal(12,2),
-);
-
-create table posjeta(
-sifra int not null primary key auto_increment,
-stomatolog int not null,
-pacijent int not null
-);
-
-create table stavka(
-sifra int not null,
-posjeta int not null,
-usluga int not null
 );
 
 create table operater(
@@ -49,7 +52,7 @@ ime varchar(50) not null,
 prezime varchar(50) not null,
 uloga varchar(10) not null 
 );
-
+/*
 insert into usluga (naziv,cijena,vrsta) values
 ('Implantologija',5500,'Implantant Nobel'),
 ('Implantologija',1800,'Superstruktura Nobel'),
@@ -57,6 +60,7 @@ insert into usluga (naziv,cijena,vrsta) values
 ('Protetika',3700,'Totalna proteza(akrilat)'),
 ('Ortodoncija',200,'Specijalistički ortodontski pregled'),
 ('Ortodoncija',9000,'Bijele bravice - Ortodonski aparat - po čeljusti');
+*/
 
 insert into operater (sifra,email,lozinka,ime,prezime,uloga)values
 (null,'ilalic110@gmail.com',
@@ -66,7 +70,8 @@ insert into operater (sifra,email,lozinka,ime,prezime,uloga)values
 '$2y$10$L1/Vyydt.F0YYDgBNQ.uIu8Gk5ZyDkU6xBzgrb9JsDfKXEs5a/JQ.',
 'Marko', 'Marulić', 'admin');
 
-alter table posjeta add foreign key (stomatolog) references stomatolog(sifra);
-alter table posjeta add foreign key (pacijent) references pacijent(sifra);
-alter table stavka add foreign key (usluga) references usluga(sifra);
-alter table stavka add foreign key (posjeta) references posjeta(sifra);
+
+alter table stomatolog add foreign key (specijalizacija) references specijalizacija(sifra);
+alter table usluga add foreign key (vrsta) references specijalizacija(sifra);
+alter table termin add foreign key (usluga) references usluga(sifra);
+alter table termin add foreign key (pacijent) references pacijent(sifra);

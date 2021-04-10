@@ -4,35 +4,33 @@ create database dental character set utf8mb4
 collate utf8mb4_croatian_ci;
 use dental;
 
-alter database ereb_dental default character set utf8mb4;
+#alter database ereb_dental default character set utf8mb4;
 
 create table stomatolog(
 sifra int not null primary key auto_increment,
 ime varchar(50) not null,
 prezime varchar(50) not null,
-specijalizacija int not null,
+specijalizacija varchar(70),
 email varchar(50) not null
 );
 
-create table specijalizacija(
-sifra int not null primary key auto_increment,
-vrsta varchar(40) not null
-);
 
-create table usluga(
+create table ordinacija(
 sifra int not null primary key auto_increment,
-vrsta int not null,
-proizvod varchar(60),
-opis text,
-cijena int not null
+grad varchar(70) not null,
+adresa varchar(150) not null,
+stomatolog int not null,
+kontakt varchar(20)
+
 );
 
 create table termin(
 sifra int not null primary key auto_increment,
 datum datetime,
-usluga int not null,
-pacijent int not null
+pacijent int not null,
+stomatolog int not null
 );
+
 
 
 create table pacijent(
@@ -40,6 +38,13 @@ sifra int not null primary key auto_increment,
 ime varchar(50),
 prezime varchar(50),
 email varchar(50)
+);
+
+create table detalji_pacijent(
+sifra int not null primary key auto_increment,
+pacijent int not null,
+opis text not null,
+datum datetime not null
 );
 
 create table operater(
@@ -51,7 +56,8 @@ prezime varchar(50) not null,
 uloga varchar(10) not null 
 );
 
-alter table stomatolog add foreign key (specijalizacija) references specijalizacija(sifra);
-alter table usluga add foreign key (vrsta) references specijalizacija(sifra);
-alter table termin add foreign key (usluga) references usluga(sifra);
+
+alter table ordinacija add foreign key (stomatolog) references stomatolog(sifra);
+alter table termin add foreign key (stomatolog) references stomatolog(sifra);
 alter table termin add foreign key (pacijent) references pacijent(sifra);
+alter table detalji_pacijent add foreign key (pacijent) references pacijent(sifra);

@@ -11,7 +11,7 @@
         <?php if(isset($_SESSION['autoriziran'])): ?>
           <li><a href="<?=App::config('url')?>nadzornaploca/index">Nadzorna ploča</a></li>
           <li><a href="<?=App::config('url')?>index/era">ERA</a></li>
-          <li><a href="<?=App::config('url')?>usluga/index">Usluga</a></li>          
+          <li><a href="<?=App::config('url')?>stomatolog/index">Stomatolozi</a></li>          
         <?php if($_SESSION['autoriziran']->uloga=='admin'): ?>
           <li><a href="#">Operateri</a></li>
         <?php endif;?>
@@ -19,8 +19,7 @@
         <?php if(!isset($_SESSION['autoriziran'])): ?>
           <li><a href="<?=App::config('url')?>">Početna</a></li>
           <li><a href="<?=App::config('url')?>index/novosti">Novosti</a></li>
-          <li><a href="<?=App::config('url')?>index/usluge">Usluge</a></li>
-          <li><a href="<?=App::config('url')?>index/kontakt">O nama</a></li>          
+          <li><a href="<?=App::config('url')?>index/usluge">Usluge</a></li>  
         <?php endif;?>
         <li>
           <?php if(!isset($_SESSION['autoriziran'])): ?>

@@ -1,0 +1,30 @@
+<table>
+    <thead>
+        <tr>
+            <th>Ime i prezime stomatologa</th>
+            <th>Specijalizacija</th>
+            <th>Email</th>
+            <th style="text-align: right;">
+            <a href="<?=App::config('url')?>stomatolog/novo">Dodaj stomatologa</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+     <?php foreach($stomatolozi as $stomatolog): ?>
+        <tr>
+            <td><?=$stomatolog->ime?> <?=$stomatolog->prezime?></td>
+            <td><?=$stomatolog->specijalizacija?></td>
+            <td><?=$stomatolog->email?></td>
+            <td>
+                <a href="<?=App::config('url')?>stomatolog/promjena">Promjeni</a>
+            </td>
+            <td>
+                <a href="<?=App::config('url')?>stomatolog/brisanje">
+                <i title="brisanje" style="color: red" class="fas fa-trash-alt"></i></a>
+            </td>
+     <?php endforeach; ?>
+        </tr>
+    </tbody>
+</table>
+
+

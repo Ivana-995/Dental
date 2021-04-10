@@ -23,11 +23,6 @@ class IndexController extends Controller
         $this->view->render('usluge');
     }
 
-    public function kontakt()
-    {
-        $this->view->render('kontakt');
-    }
-
     public function login()
     {
         $this->loginView('','');

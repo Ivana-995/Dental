@@ -29,7 +29,6 @@ class StomatologController extends AutorizacijaController
        try
        {
            $this->kontrola();
-           $this->kontrolaSpecijalizacija();
            Stomatolog::spremiNovo($this->stomatolog);
            $this->index();
        }

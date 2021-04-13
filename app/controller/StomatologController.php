@@ -7,14 +7,14 @@ class StomatologController extends AutorizacijaController
                       . 'stomatolog'
                       . DIRECTORY_SEPARATOR;
     
-    private $entitet=null;
+    private $stomatolog=null;
     private $poruka='';
 
     public function index()
     {
         $this->view->render($this->viewDir . 'index',
         [
-            'entiteti'=>Stomatolog::ucitajSve()
+            'stomatolozi'=>Stomatolog::ucitajSve()
         ]);
     }
 
@@ -22,15 +22,15 @@ class StomatologController extends AutorizacijaController
     {
        if($_SERVER['REQUEST_METHOD']==='GET')
        {
-           $this->noviEntitet();
+           $this->novoStomatolog();
            return;
        }
-       $this->entitet = (object) $_POST;
+       $this->stomatolog = (object) $_POST;
        try
        {
            $this->kontrola();
            $this->kontrolaSpecijalizacija();
-           Stomatolog::spremiNovo($this->entitet);
+           Stomatolog::spremiNovo($this->stomatolog);
            $this->index();
        }
        catch (Exception $e)
@@ -40,23 +40,74 @@ class StomatologController extends AutorizacijaController
        }    
     }
 
-    private function noviEntitet()
+    public function promjena()
     {
-        $this->entitet = new stdClass();
-        $this->entitet->ime='';
-        $this->entitet->prezime='';
-        $this->entitet->specijalizacija='';
-        $this->entitet->email='';
+        if($_SERVER['REQUEST_METHOD']==='GET')
+        {
+            if(!isset($_GET['sifra']))
+            {
+                $ic = new IndexController();
+                $ic->logout();
+                return;
+            }
+            $this->stomatolog = Stomatolog::ucitaj($_GET['sifra']);
+            $this->poruka='Promjenite željene podatke';
+            $this->promjenaView();
+            return;
+        }
+        $this->stomatolog = (object) $_POST;
+        try{
+            $this->kontrola();
+            Stomatolog::promjenaPostojeci($this->stomatolog);
+            $this->index();
+        }
+        catch (Exception $e)
+            {
+            $this->poruka=$e->getMessage();
+            $this->promjenaView();
+            }
+    }
+
+    public function brisanje()
+    {
+        if(!isset($_GET['sifra']))
+        {
+            $ic = new IndexController();
+            $ic->logout();
+            return;
+        }
+        Stomatolog::obrisiPostojeci($_GET['sifra']);
+        header('location: ' . App::config('url') . 'stomatolog/index');
+    }
+
+    private function novoStomatolog()
+    {
+        $this->stomatolog = new stdClass();
+        $this->stomatolog->ime='';
+        $this->stomatolog->prezime='';
+        $this->stomatolog->specijalizacija='';
+        $this->stomatolog->email='';
         $this->poruka='Unesite tražene podatke';
         $this->novoView();
     }
 
     private function novoView()
     {
-        $this->view->render($this->viewDir . 'novo',[
-            'entitet'=>$this->entitet,
+        $this->view->render($this->viewDir . 'novo',
+        [
+            'stomatolog'=>$this->stomatolog,
             'poruka'=>$this->poruka
         ]);
+    }
+
+    private function promjenaView()
+    {
+        $this->view->render($this->viewDir . 'promjena',
+        [
+            'stomatolog'=>$this->stomatolog,
+            'poruka'=>$this->poruka
+        ]);
+
     }
 
     private function kontrola()
@@ -74,31 +125,31 @@ class StomatologController extends AutorizacijaController
     
     private function kontrolaIme()
     {
-        if(strlen(trim($this->entitet->ime))==0){
+        if(strlen(trim($this->stomatolog->ime))==0){
             throw new Exception('Unesite ime');
         }
 
-        if(strlen(trim($this->entitet->ime))>50){
+        if(strlen(trim($this->stomatolog->ime))>50){
             throw new Exception('Ime predugačko');
         }
     }
     private function kontrolaPrezime()
     {
-        if(strlen(trim($this->entitet->prezime))==0){
+        if(strlen(trim($this->stomatolog->prezime))==0){
             throw new Exception('Unesite prezime');
         }
     }
 
     private function kontrolaSpecijalizacija()
     {
-        if(strlen(trim($this->entitet->specijalizacija))==0){
+        if(strlen(trim($this->stomatolog->specijalizacija))==0){
             throw new Exception('Unesite specijalizaciju');
         }
     }
 
     private function kontrolaEmail()
     {
-        if(strlen(trim($this->entitet->email))==0){
+        if(strlen(trim($this->stomatolog->email))==0){
             throw new Exception('Unesite email');
         }
     }

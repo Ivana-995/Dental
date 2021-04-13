@@ -12,16 +12,20 @@
         </tr>
     </thead>
     <tbody>
-     <?php foreach($entiteti as $red): ?>
+     <?php foreach($stomatolozi as $stomatolog): ?>
         <tr>
-            <td><?=$red->ime?> <?=$red->prezime?></td>
-            <td><?=$red->specijalizacija?></td>
-            <td><?=$red->email?></td>
-            <td>
-                <a href="<?=App::config('url')?>stomatolog/promjena">
-                  <i title="promjena" class="fas fa-2x fa-edit" ></i></a>      
-                <a href="<?=App::config('url')?>stomatolog/brisanje">
-                  <i title="brisanje" style="color: red" class="fas fa-2x fa-trash-alt"></i></a>
+          <td><?=$stomatolog->ime?> <?=$stomatolog->prezime?></td>
+          <td><?=$stomatolog->specijalizacija?></td>
+          <td><?=$stomatolog->email?></td>
+          <td>
+            <a href="<?=App::config('url')?>stomatolog/promjena?sifra=<?=$stomatolog->sifra?>">
+                <i title="promjena" class="fas fa-2x fa-edit" ></i></a>
+
+            <?php if($stomatolog->ukupnotermina==0): ?>
+            <a href="<?=App::config('url')?>stomatolog/brisanje?sifra=<?=$stomatolog->sifra?>"
+            onclick="return confirm('Sigurno obrisati <?=$stomatolog->ime?>  <?=$stomatolog->prezime?>?');">
+                <i title="brisanje" style="color: red" class="fas fa-2x fa-trash-alt"></i></a>
+            <?php endif; ?>
             </td>
      <?php endforeach; ?>
         </tr>

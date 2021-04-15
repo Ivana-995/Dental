@@ -4,18 +4,33 @@ class Termin
 {
     public static function ucitajSve()
     {
-        $veza= DB::getInstanca();
+        $veza = DB::getInstanca();
         $izraz=$veza->prepare('
         
-        select b.ime, b.prezime, a.datum, c.specijalizacija as usluga,
-        c.prezime as stomatolog
+
+        select concat(b.ime, \' \', b.prezime) as stomatolog,
+        concat(d.ime, \' \', d.prezime) as pacijent
         from termin a 
-        inner join pacijent b on a.pacijent=b.sifra 
-        inner join stomatolog c on a.stomatolog =c.sifra 
-        group by b.ime, b.prezime, a.datum, c.specijalizacija, c.prezime 
+        inner join stomatolog b on a.stomatolog=b.sifra
+        right join ordinacija c on b.ordinacija=c.sifra
+        inner join pacijent d on a.pacijent=d.sifra
       
+
         ');
         $izraz->execute();
         return $izraz->fetchAll();
+    }
+
+    public static function dodajNovo($entitet)
+    {
+        $veza = DB::getInstanca();
+        $izraz=$veza->prepare('
+        
+            insert into termin (pacijent,stomatolog)
+            values (:pacijent, :stomatolog)
+        
+        ');
+        $izraz->execute((array)$entitet);
+        return $veza->lastInsertId();
     }
 }

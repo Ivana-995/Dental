@@ -6,47 +6,6 @@ use dental;
 
 #alter database ereb_dental default character set utf8mb4;
 
-create table stomatolog(
-sifra int not null primary key auto_increment,
-ime varchar(50) not null,
-prezime varchar(50) not null,
-specijalizacija varchar(70),
-email varchar(50) not null
-);
-
-
-create table ordinacija(
-sifra int not null primary key auto_increment,
-grad varchar(70) not null,
-adresa varchar(150) not null,
-stomatolog int not null,
-kontakt varchar(20)
-
-);
-
-create table termin(
-sifra int not null primary key auto_increment,
-datum datetime,
-pacijent int not null,
-stomatolog int not null
-);
-
-
-
-create table pacijent(
-sifra int not null primary key auto_increment,
-ime varchar(50),
-prezime varchar(50),
-email varchar(50)
-);
-
-create table detalji_pacijent(
-sifra int not null primary key auto_increment,
-pacijent int not null,
-opis text not null,
-datum datetime not null
-);
-
 create table operater(
 sifra int not null primary key auto_increment,
 email varchar(50) not null,
@@ -56,8 +15,36 @@ prezime varchar(50) not null,
 uloga varchar(10) not null 
 );
 
+create table ordinacija(
+sifra int not null primary key auto_increment,
+grad varchar(70) not null,
+adresa varchar(150)not null,
+kontakt varchar(20)not null 
+);
 
-alter table ordinacija add foreign key (stomatolog) references stomatolog(sifra);
+create table stomatolog(
+sifra int not null primary key auto_increment,
+ime varchar(50) not null,
+prezime varchar(50) not null,
+specijalizacija varchar(70)not null,
+email varchar(50),
+ordinacija int not null
+);
+
+create table pacijent(
+sifra int not null primary key auto_increment,
+ime varchar(50),
+prezime varchar(50),
+email varchar(50)
+);
+
+create table termin(
+pacijent int not null,
+stomatolog int not null
+);
+
+alter table stomatolog add foreign key (ordinacija) references ordinacija(sifra);
 alter table termin add foreign key (stomatolog) references stomatolog(sifra);
 alter table termin add foreign key (pacijent) references pacijent(sifra);
-alter table detalji_pacijent add foreign key (pacijent) references pacijent(sifra);
+
+

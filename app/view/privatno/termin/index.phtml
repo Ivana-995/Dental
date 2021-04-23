@@ -1,13 +1,10 @@
 <table class="unstriped stack">
     <thead>
         <h4 style="text-align: center;">Termini</h4>
-        </br>
         <tr>
             <th>Pacijent</th>
             <th>Stomatolog</th>
-            <th style="text-align: justify;">
-            <a href="<?=App::config('url')?>termin/novo">Dodaj termin</a>
-            </th>
+            <th>Specijalizacija</th>
         </tr>
     </thead>
     <tbody>
@@ -15,13 +12,7 @@
         <tr>
           <td><?=$red->pacijent?></td>
           <td><?=$red->stomatolog?></td>
-          <td>
-            <a href="<?=App::config('url')?>termin/promjena?sifra=<?=$red->sifra?>">
-                <i title="promjena" class="fas fa-2x fa-edit" ></i></a>
-            <a href="<?=App::config('url')?>termin/brisanje?sifra=<?=$red->sifra?>"
-            onclick="return confirm('Sigurno obrisati termin ?');">
-                <i title="brisanje" style="color: red" class="fas fa-2x fa-trash-alt"></i></a>
-            </td>
+          <td><?=$red->specijalizacija?></td>
      <?php endforeach; ?>
         </tr>
     </tbody>

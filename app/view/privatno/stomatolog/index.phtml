@@ -6,24 +6,26 @@
             <th>Ime i prezime stomatologa</th>
             <th>Specijalizacija</th>
             <th>Email</th>
+            <th>Ordinacija</th>
             <th style="text-align: justify;">
             <a href="<?=App::config('url')?>stomatolog/novo">Dodaj stomatologa</a>
             </th>
         </tr>
     </thead>
     <tbody>
-     <?php foreach($stomatolozi as $stomatolog): ?>
+     <?php foreach($entiteti as $entitet): ?>
         <tr>
-          <td><?=$stomatolog->ime?> <?=$stomatolog->prezime?></td>
-          <td><?=$stomatolog->specijalizacija?></td>
-          <td><?=$stomatolog->email?></td>
+          <td><?=$entitet->ime. ' ' .$entitet->prezime?></td>
+          <td><?=$entitet->specijalizacija?></td>
+          <td><?=$entitet->email?></td>
+          <td><?=$entitet->ordinacija?></td>
           <td>
-            <a href="<?=App::config('url')?>stomatolog/promjena?sifra=<?=$stomatolog->sifra?>">
+            <a href="<?=App::config('url')?>stomatolog/promjena?sifra=<?=$entitet->sifra?>">
                 <i title="promjena" class="fas fa-2x fa-edit" ></i></a>
 
-            <?php if($stomatolog->ukupnotermina==0): ?>
-            <a href="<?=App::config('url')?>stomatolog/brisanje?sifra=<?=$stomatolog->sifra?>"
-            onclick="return confirm('Sigurno obrisati <?=$stomatolog->ime?>  <?=$stomatolog->prezime?>?');">
+            <?php if($entitet->ukupnotermina==0): ?>
+            <a href="<?=App::config('url')?>stomatolog/brisanje?sifra=<?=$entitet->sifra?>"
+            onclick="return confirm('Sigurno obrisati <?=$entitet->ime?>  <?=$entitet->prezime?>?');">
                 <i title="brisanje" style="color: red" class="fas fa-2x fa-trash-alt"></i></a>
             <?php endif; ?>
             </td>

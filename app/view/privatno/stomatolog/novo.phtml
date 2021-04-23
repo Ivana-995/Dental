@@ -8,12 +8,12 @@
   <div class="grid-x grid-padding-x">
     <div class="cell large-6">
         <label>Ime
-          <input type="text" name="ime" value="<?=$stomatolog->ime?>">
+          <input type="text" name="ime" value="<?=$entitet->ime?>">
         </label>
     </div>
     <div class="cell large-6">
       <label>Prezime
-        <input type="text"  name="prezime" value="<?=$stomatolog->prezime?>">
+        <input type="text"  name="prezime" value="<?=$entitet->prezime?>">
       </label>
     </div>
   </div>
@@ -21,15 +21,35 @@
   <div class="grid-x grid-padding-x">
     <div class="cell large-6">
       <label>Specijalizacija
-        <input type="text" name="specijalizacija" value="<?=$stomatolog->specijalizacija?>">
+        <input type="text" name="specijalizacija" value="<?=$entitet->specijalizacija?>">
       </label>
     </div>
     <div class="cell large-6">
       <label>Email
-        <input type="email" name="email" value="<?=$stomatolog->email?>">
+        <input type="email" name="email" value="<?=$entitet->email?>">
       </label>
     </div>
   </div>
+
+  <div class="grid-x grid-padding-x">
+    <div class="cell large-6">
+      <label>Grad
+        <input type="text" name="grad" value="<?=$entitet->grad?>">
+      </label>
+    </div>
+    <div class="cell large-6">
+      <label>Adresa
+        <input type="text" name="adresa" value="<?=$entitet->adresa?>">
+      </label>
+    </div>
+    <div class="cell large-6">
+      <label>Kontakt
+        <input type="text" name="kontakt" value="<?=$entitet->kontakt?>">
+      </label>
+    </div>
+  </div>
+   
+  
 
    <p class="text-center"><?=$poruka?></p>
 
@@ -42,3 +62,4 @@
       href="<?=App::config('url')?>stomatolog/index">Nazad</a>
     </div>
   </div>
+</form>

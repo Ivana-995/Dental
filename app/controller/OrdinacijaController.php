@@ -9,8 +9,24 @@ class OrdinacijaController extends AutorizacijaController
 
     public function index()
     {
+        $ordinacije = Ordinacija::ucitajSve();
+
+        foreach($ordinacije as $red)
+        {
+         if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR .
+            'img' . DIRECTORY_SEPARATOR . 'ordinacija' . 
+            DIRECTORY_SEPARATOR . $red->sifra . '.png'))
+            {
+                $red->slika = App::config('url') . 
+                'public/img/ordinacija/' . $red->sifra . '.png';
+            }else
+                {
+                    $red->slika = App::config('url') . 
+                    'public/img/ordinacija/nepoznato.png';
+                }
+        }
         $this->view->render($this->viewDir . 'index',[
-            'entiteti'=>Ordinacija::ucitajSve()
+            'entiteti'=>$ordinacije
         ]);
     }
 

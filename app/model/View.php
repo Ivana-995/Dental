@@ -13,11 +13,11 @@ class View
     {
         ob_start();
         extract($parametri);
-        include BP . 'view' . DIRECTORY_SEPARATOR . 
+        include BP_APP . 'view' . DIRECTORY_SEPARATOR . 
         $stranicaZaRender . '.phtml';
         $sadrzaj = ob_get_clean();
         $podnozjePodaci=$this->podnozjePodaci();
-        include BP . 'view' . DIRECTORY_SEPARATOR .  
+        include BP_APP . 'view' . DIRECTORY_SEPARATOR .  
         $this->predlozak . '.phtml';
     }
 

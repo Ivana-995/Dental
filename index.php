@@ -13,16 +13,16 @@ error_reporting(E_ALL);
 session_start();
 
 
-define('BP',__DIR__ . DIRECTORY_SEPARATOR 
+define('BP',__DIR__ . DIRECTORY_SEPARATOR);
+define('BP_APP',__DIR__ . DIRECTORY_SEPARATOR 
             . 'app' . DIRECTORY_SEPARATOR);
-
 
 
 $putanje=implode(
     PATH_SEPARATOR,
     [
-        BP . 'model',
-        BP . 'controller'
+        BP_APP . 'model',
+        BP_APP . 'controller'
     ]
 );
 

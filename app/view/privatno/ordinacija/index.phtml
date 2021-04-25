@@ -1,36 +1,30 @@
-<table class="unstriped stack">
-    <thead>
-    <h4 style="text-align: center;">Baza ordinacija</h4>
-    
-    
-        <tr>
-            <th>Grad</th>
-            <th>Adresa</th>
-            <th>Kontakt</th>
-            <th>
-            <a href="<?=App::config('url')?>ordinacija/novo"></a>
-              <i title="dodaj novu ordinaciju" class="fas fa-2x fa-plus-square" style="color: green"></i>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach($entiteti as $red): ?>
-            <tr>
-                <td><?=$red->grad?></td>
-                <td><?=$red->adresa?></td>
-                <td><?=$red->kontakt?></td>
-                <td>
-                  <a href="<?=App::config('url')?>ordinacija/promjena?sifra=<?=$red->sifra?>">
+<h4 style="text-align: center;">Baza ordinacija</h4>
+
+<a href="<?=App::config('url')?>ordinacija/novo" style="font-weight:bold" >Dodaj novu ordinaciju</a>
+</hr>
+
+<div class="grid-x grid-padding-x">
+    <?php foreach($entiteti as $red): ?>
+        <div class="large-3 medium-6 cell">
+            <div class="callout" style="min-height: 200px; text-align: center;">
+
+                <img src="<?=$red->slika?>" 
+                alt="<?=$red->grad?> <?=$red->adresa?>"
+                style="max-height: 150px;"><br />
+
+                <?=$red->grad?> <br /> <?=$red->adresa?> <br />
+                <?=$red->kontakt?>
+
+                <hr />
+                <a href="<?=App::config('url')?>ordinacija/promjena?sifra=<?=$red->sifra?>">
                     <i title="promjena" class="fas fa-2x fa-pencil-alt"></i>
-              <?php if($red->ukupnostomatologa==0): ?>
+                </a> 
+                <?php if($red->ukupnostomatologa==0): ?>
                     <a href="<?=App::config('url')?>ordinacija/brisanje?sifra=<?=$red->sifra?>"
-                onclick="return confirm('Sigurno obrisati <?=$red->grad?>, <?=$red->adresa?>?');">
-                <i title="brisanje" style="color: red" class="fas fa-2x fa-trash-alt"></i></a>
-              <?php endif; ?>
-                </td>
-            </tr>
-
-        <?php endforeach; ?>
-    </tbody>
-</table>
-
+                    onclick="return confirm('Sigurno obrisati <?=Funkcije::escapeSingleQuote($red->grad . ' ' . $red->adresa) ?>?');">
+                    <i title="brisanje" style="color: red" class="fas fa-2x fa-trash-alt"></i></a>
+                <?php endif;?>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>

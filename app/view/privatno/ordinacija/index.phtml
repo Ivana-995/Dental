@@ -1,0 +1,36 @@
+<table class="unstriped stack">
+    <thead>
+    <h4 style="text-align: center;">Baza ordinacija</h4>
+    
+    
+        <tr>
+            <th>Grad</th>
+            <th>Adresa</th>
+            <th>Kontakt</th>
+            <th>
+            <a href="<?=App::config('url')?>ordinacija/novo"></a>
+              <i title="dodaj novu ordinaciju" class="fas fa-2x fa-plus-square" style="color: green"></i>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($entiteti as $red): ?>
+            <tr>
+                <td><?=$red->grad?></td>
+                <td><?=$red->adresa?></td>
+                <td><?=$red->kontakt?></td>
+                <td>
+                  <a href="<?=App::config('url')?>ordinacija/promjena?sifra=<?=$red->sifra?>">
+                    <i title="promjena" class="fas fa-2x fa-pencil-alt"></i>
+              <?php if($red->ukupnostomatologa==0): ?>
+                    <a href="<?=App::config('url')?>ordinacija/brisanje?sifra=<?=$red->sifra?>"
+                onclick="return confirm('Sigurno obrisati <?=$red->grad?>, <?=$red->adresa?>?');">
+                <i title="brisanje" style="color: red" class="fas fa-2x fa-trash-alt"></i></a>
+              <?php endif; ?>
+                </td>
+            </tr>
+
+        <?php endforeach; ?>
+    </tbody>
+</table>
+

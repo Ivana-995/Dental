@@ -1,0 +1,35 @@
+<form class="log-in-form" 
+    action="<?=App::config('url')?>ordinacija/novo"
+    method="POST">
+  <h4 class="text-center">Unos nove ordinacije</h4>
+
+  <div class="grid-x grid-padding-x">
+    <div class="cell large-6">
+      <label>Grad
+        <input type="text" name="grad" value="<?=$entitet->grad?>">
+      </label>
+    </div>
+    <div class="cell large-6">
+      <label>Adresa
+        <input type="text"  name="adresa" value="<?=$entitet->adresa?>">
+      </label>
+    </div>
+    <div class="cell large-6">
+      <label>Kontakt
+        <input type="text" name="kontakt" value="<?=$entitet->kontakt?>">
+      </label>
+    </div>
+  </div>
+
+   <p class="text-center"><?=$poruka?></p>
+
+  <div class="grid-x grid-padding-x">
+    <div class="cell small-6 medium-6 large-6">
+      <input type="submit" class="button expanded" value="Spremi"></input>
+    </div>
+    <div class="cell small-6 medium-6 large-6">
+      <a class="alert button expanded" 
+      href="<?=App::config('url')?>ordinacija/index">Nazad</a>
+    </div>
+  </div>
+</form>

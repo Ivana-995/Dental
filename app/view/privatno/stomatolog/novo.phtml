@@ -33,18 +33,16 @@
 
   <div class="grid-x grid-padding-x">
     <div class="cell large-6">
-      <label>Grad
-        <input type="text" name="grad" value="<?=$entitet->grad?>">
-      </label>
-    </div>
-    <div class="cell large-6">
-      <label>Adresa
-        <input type="text" name="adresa" value="<?=$entitet->adresa?>">
-      </label>
-    </div>
-    <div class="cell large-6">
-      <label>Kontakt
-        <input type="text" name="kontakt" value="<?=$entitet->kontakt?>">
+    <label>Ordinacija
+      <select name="ordinacija">
+          <?php foreach($ordinacije as $ordinacija): ?>
+            <option <?php 
+              if($entitet->ordinacija==$ordinacija->sifra){
+                echo ' selected="selected" ';
+              }
+              ?> value="<?=$ordinacija->sifra ?>"><?=$ordinacija->grad . ' ' . $ordinacija->adresa; ?></option>
+          <?php endforeach; ?>
+        </select>
       </label>
     </div>
   </div>

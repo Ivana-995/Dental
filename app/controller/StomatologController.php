@@ -9,6 +9,22 @@ class StomatologController extends AutorizacijaController
     
     private $entitet=null;
     private $poruka='';
+    private $ordinacije=null;
+    
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->ordinacije=Ordinacija::ucitajSve();
+
+        $s=new stdClass();
+        $s->sifra=-1;
+        $s->grad='Odaberite mjesto ';
+        $s->adresa='ordinacije';
+        array_unshift($this->ordinacije,$s);
+
+    }
+
 
     public function index()
     {
@@ -84,12 +100,11 @@ class StomatologController extends AutorizacijaController
         $this->entitet->prezime='';
         $this->entitet->specijalizacija='';
         $this->entitet->email='';
-        $this->entitet->grad='';
-        $this->entitet->adresa='';
-        $this->entitet->kontakt='';
+        $this->entitet->ordinacija=-1;
         $this->poruka='Unesite tražene podatke';
         $this->novoView();
     }
+
 
     private function novoView()
     {
@@ -97,6 +112,7 @@ class StomatologController extends AutorizacijaController
         [
             'entitet'=>$this->entitet,
             'poruka'=>$this->poruka,
+            'ordinacije'=>$this->ordinacije
         ]);
     }
 
@@ -105,7 +121,8 @@ class StomatologController extends AutorizacijaController
         $this->view->render($this->viewDir . 'promjena',
         [
             'entitet'=>$this->entitet,
-            'poruka'=>$this->poruka
+            'poruka'=>$this->poruka,
+            'ordinacije'=>$this->ordinacije
         ]);
 
     }
@@ -124,12 +141,6 @@ class StomatologController extends AutorizacijaController
         $this->kontrolaSpecijalizacija();
     }
 
-    private function kontrolaOrdinacija()
-    {
-        $this->kontrolaGrad();
-        $this->kontrolaAdresa();
-        $this->kontrolaKontakt();
-    }
     
     private function kontrolaIme()
     {
@@ -159,30 +170,12 @@ class StomatologController extends AutorizacijaController
         }
     }
 
-    private function kontrolaGrad()
+    private function kontrolaOrdinacija()
     {
-        if(strlen(trim($this->entitet->grad))==0){
-            throw new Exception('Unesite grad');
+        if($this->entitet->ordinacija==-1)
+        {
+            throw new Exception('Odaberite mjesto ordinacije');
         }
-    }
-
-    private function kontrolaAdresa()
-    {
-        if(strlen(trim($this->entitet->adresa))==0){
-            throw new Exception('Unesite adresu');
-        }
-    }
-
-    private function kontrolaKontakt()
-    {
-        $this->entitet->kontakt=str_replace(',','.',$this->entitet->kontakt);
-        if(!is_numeric($this->entitet->kontakt)
-              || ((float)$this->entitet->kontakt)<=0){
-                $this->poruka='Unesite broj kontakta';
-              $this->novoView();
-              return false;
-        }
-         return true;
     }
     
 

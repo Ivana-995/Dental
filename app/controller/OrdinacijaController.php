@@ -9,7 +9,38 @@ class OrdinacijaController extends AutorizacijaController
 
     public function index()
     {
-        $ordinacije = Ordinacija::ucitajSve();
+        #pretraživanje po stranicama
+        if(isset($_GET['uvjet']))
+        {
+            $uvjet='%' . $_GET['uvjet'] . '%';
+        }else
+            {
+                $uvjet='%';
+                $_GET['uvjet']='';
+            }
+
+        if(isset($_GET['stranica']))
+        {
+            $stranica = $_GET['stranica'];
+            if($stranica==0)
+            {
+                $stranica=1;
+            }
+        }else
+            {
+                $stranica=1;
+            }
+
+        $brojOrdinacija=Ordinacija::ukupnoOrdinacija($uvjet);
+        $ukupnoStranica=ceil($brojOrdinacija/App::config('rezultataPoStranici'));
+
+        #ograničavanje stranica
+        if($stranica>$ukupnoStranica)
+        {
+            $stranica=$ukupnoStranica;
+        }
+        
+        $ordinacije = Ordinacija::ucitajSve($stranica,$uvjet);
 
         foreach($ordinacije as $red)
         {
@@ -26,7 +57,10 @@ class OrdinacijaController extends AutorizacijaController
                 }
         }
         $this->view->render($this->viewDir . 'index',[
-            'entiteti'=>$ordinacije
+            'entiteti'=>$ordinacije,
+            'uvjet'=>$_GET['uvjet'],
+            'stranica'=>$stranica,
+            'ukupnoStranica'=>$ukupnoStranica
         ]);
     }
 

@@ -21,5 +21,6 @@ if($dev)
     return [
         'url'=>'http://polaznik34.edunova.hr/',
         'nazivApp'=>'DENTAL',
-        'baza'=>$baza
+        'baza'=>$baza,
+        'rezultataPoStranici'=>4
     ];

@@ -1,7 +1,17 @@
 <h4 style="text-align: center;">Baza ordinacija</h4>
-
-<a href="<?=App::config('url')?>ordinacija/novo" style="font-weight:bold" >Dodaj novu ordinaciju</a>
-</hr>
+    <div class="grid-x grid-padding-x">
+        <div class="large-11 medium-11 small-10 cell">
+            <form action="<?=App::config('url')?>ordinacija/index" method="get">
+                <input type="text" name="uvjet" value="<?=$uvjet?>"
+                placeholder="Unesite dio naziva grada ili adrese">
+            </form>
+        </div>
+        <div class="large-1 medium-1 small-2 cell" style="padding-top:5px;">
+            <a href="<?=App::config('url')?>ordinacija/novo">
+            <i title="dodaj novu ordinaciju" class="fas fa-2x fa-plus-square" style="color: green"></i>
+            </a>
+        </div>
+    </div>
 
 <div class="grid-x grid-padding-x">
     <?php foreach($entiteti as $red): ?>
@@ -9,7 +19,9 @@
             <div class="callout" style="min-height: 200px; text-align: center;">
 
                 <img src="<?=$red->slika?>" 
+                class="slika" id="p_<?=$red->sifra?>"
                 alt="<?=$red->grad?> <?=$red->adresa?>"
+                
                 style="max-height: 150px;"><br />
 
                 <?=$red->grad?> <br /> <?=$red->adresa?> <br />
@@ -21,10 +33,28 @@
                 </a> 
                 <?php if($red->ukupnostomatologa==0): ?>
                     <a href="<?=App::config('url')?>ordinacija/brisanje?sifra=<?=$red->sifra?>"
-                    onclick="return confirm('Sigurno obrisati <?=Funkcije::escapeSingleQuote($red->grad . ' ' . $red->adresa) ?>?');">
+                    onclick="return confirm('Sigurno obrisati <?=Funkcije::escapeSingleQuote($red->grad . ', ' . $red->adresa) ?>?');">
                     <i title="brisanje" style="color: red" class="fas fa-2x fa-trash-alt"></i></a>
                 <?php endif;?>
             </div>
         </div>
     <?php endforeach; ?>
+
+    <div class="cell">
+        <div class="callout">
+            <nav aria-label="Pagination">
+                <ul class="pagination text-center">
+                    <li class="pagination-previous"> 
+                    <a href="<?=App::config('url')?>ordinacija/index?stranica=<?php echo $stranica-1 ?>&uvjet=<?=$uvjet ?>">Prethodna</a></li>
+                    <li class="current"><span class="show-for-sr">
+                    Vi ste na</span> <?php echo $stranica ?> / <?php echo $ukupnoStranica ?></li>
+                    <li class="pagination-next">
+                    <a href="<?=App::config('url')?>ordinacija/index?stranica=<?php echo $stranica+1 ?>&uvjet=<?=$uvjet ?>" aria-label="Sljedeća stranica">Sljedeća</a></li>
+                </ul>
+            </nav>
+            <?php if($uvjet==!0): ?>
+            <p class="text-center"><a href="<?=App::config('url')?>ordinacija/index">Natrag na Bazu ordinacija</a></p>
+            <?php endif;?>
+        </div>
+    </div>
 </div>

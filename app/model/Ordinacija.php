@@ -2,6 +2,23 @@
 
 class Ordinacija
 {
+    public static function brojStomatologaPoOrdinacijama()
+    {
+        $veza = DB::getInstanca();
+        $izraz=$veza->prepare('
+        
+        select a.grad as name, count(b.ordinacija) as y
+        from ordinacija a
+        left join stomatolog b
+        on a.sifra=b.ordinacija 
+        group by a.grad;
+        
+        ');
+        $izraz->execute();
+        return $izraz->fetchAll();
+
+    }
+
     public static function ucitaj($sifra)
     {
         $veza = DB::getInstanca();

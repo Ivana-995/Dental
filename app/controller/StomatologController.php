@@ -15,7 +15,7 @@ class StomatologController extends AutorizacijaController
     public function __construct()
     {
         parent::__construct();
-        $this->ordinacije=Ordinacija::ucitajSve();
+        $this->ordinacije=Ordinacija::ucitajZaStomatologa();
 
         $s=new stdClass();
         $s->sifra=-1;

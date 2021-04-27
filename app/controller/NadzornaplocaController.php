@@ -11,7 +11,7 @@ class NadzornaplocaController extends AutorizacijaController
             <script src="https://code.highcharts.com/modules/export-data.js"></script>
             <script src="https://code.highcharts.com/modules/accessibility.js"></script>
             <script>let podaci=' . 
-            json_encode(Ordinacija::brojStomatologaPoOrdinacijama(), JSON_NUMERIC_CHECK) 
+            json_encode(Ordinacija::brojOrdinacijaPoGradovima(), JSON_NUMERIC_CHECK) 
             . ';</script>
             <script src="' . App::config('url') . 'public/js/nadzornaploca.js"></script>'
         ]);

@@ -2,7 +2,7 @@
 
 class Ordinacija
 {
-    public static function brojStomatologaPoOrdinacijama()
+    public static function brojOrdinacijaPoGradovima()
     {
         $veza = DB::getInstanca();
         $izraz=$veza->prepare('
